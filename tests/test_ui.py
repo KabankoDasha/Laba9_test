@@ -48,11 +48,23 @@ class ContactPage(BasePage):
         super().__init__(driver)
     
     def open_form_page(self):
-        # Используем относительный путь
-        form_path = os.path.join(os.path.dirname(__file__), "form.html")
-        self.driver.get(f"file://{form_path}")
-        time.sleep(2)
-        return self
+        # Получаем абсолютный путь к корню проекта в GitHub Actions
+        base_path = os.getcwd()  # Текущая рабочая директория
+        # Пытаемся найти файл form.html
+        possible_paths = [
+            os.path.join(base_path, "form.html"),          # В корне проекта
+            os.path.join(base_path, "tests", "form.html"), # В папке tests
+            os.path.join(os.path.dirname(__file__), "form.html") # Рядом с test_ui.py
+        ]
+        
+        for form_path in possible_paths:
+            if os.path.exists(form_path):
+                self.driver.get(f"file://{form_path}")
+                time.sleep(2)
+                return self
+        
+        # Если файл не найден - явно падаем с понятной ошибкой
+        raise FileNotFoundError(f"Не удалось найти form.html. Проверенные пути: {possible_paths}")
     
     def fill_name_field(self, name):
         self.input_text(By.ID, "name", name)
