@@ -97,7 +97,7 @@ jobs:
     # 10. Сохраняем отчет как артефакт
     - name: Upload test report
       if: always()
-      uses: actions/upload-artifact@v3
+      uses: actions/upload-artifact@v4
       with:
-        name: test-report
-        path: test-report.html
+        name: my-artifact
+        path: path/to/artifact/
