@@ -52,9 +52,9 @@ class ContactPage(BasePage):
         base_path = os.getcwd()  # Текущая рабочая директория
         # Пытаемся найти файл form.html
         possible_paths = [
-            os.path.join(base_path, "form.html"),          # В корне проекта
-            os.path.join(base_path, "tests", "form.html"), # В папке tests
-            os.path.join(os.path.dirname(__file__), "form.html") # Рядом с test_ui.py
+            os.path.join(base_path, "form.html"),         
+            os.path.join(base_path, "tests", "form.html"), 
+            os.path.join(os.path.dirname(__file__), "form.html") 
         ]
         
         for form_path in possible_paths:
