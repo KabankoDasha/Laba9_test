@@ -117,20 +117,38 @@ class ContactPage(BasePage):
         return self
     
     def check_success_message(self):
+        # Ждем и проверяем, появилась ли новая вкладка
+        import time
+        time.sleep(3)  # Даем время на открытие новой вкладки
+        print(f"Количество вкладок после отправки формы: {len(self.driver.window_handles)}")
+        
         if len(self.driver.window_handles) > 1:
+            print("Новая вкладка обнаружена, переключаемся...")
             self.driver.switch_to.window(self.driver.window_handles[1])
+            print(f"Текущий URL: {self.driver.current_url}")
             
-            index_path = os.path.join(os.path.dirname(__file__), "index.html")
-            self.driver.get(f"file://{index_path}")
-            time.sleep(2)
+            # Пробуем получить title страницы
+            print(f"Заголовок страницы: {self.driver.title}")
             
-            success_text = self.get_element_text(By.CSS_SELECTOR, "label[for='regist']")
+            # Пробуем получить весь HTML для анализа
+            print(f"Первые 500 символов HTML: {self.driver.page_source[:500]}")
             
-            self.driver.close()
-            self.driver.switch_to.window(self.driver.window_handles[0])
-            
-            return success_text
-        return ""
+            # Теперь пытаемся найти элемент
+            try:
+                success_text = self.get_element_text(By.CSS_SELECTOR, "label[for='regist']")
+                print(f"Найден текст: {success_text}")
+                self.driver.close()
+                self.driver.switch_to.window(self.driver.window_handles[0])
+                return success_text
+            except Exception as e:
+                print(f"Не удалось найти элемент: {e}")
+                self.driver.close()
+                self.driver.switch_to.window(self.driver.window_handles[0])
+                return ""
+        else:
+            print("Новая вкладка НЕ открылась. Остаемся на текущей странице.")
+            print(f"Текущий URL: {self.driver.current_url}")
+            return ""
 
 
 # Фикстура для драйвера
