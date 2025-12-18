@@ -1,0 +1,93 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="style.css" />
+</head>
+<body>
+    <form id="form" action="index.html" enctype="application/x-www-form-urlencoded" method="post">
+
+        <div class="form-row">
+            <label for="name">Ф.И.О. *</label>
+            <input type="text" id="name" placeholder="Иванов Иван Иванович" required>
+        </div>
+
+        <div class="form-row">
+            <label for="birthday">Дата рождения</label>
+            <input type="date" id="birthday" name="date">
+        </div>
+
+        <div class="form-row">
+            <label for="country">Укажите страну проживания</label>
+            <select id="country">
+                <option value="belarus">Беларусь</option>
+                <option value="georgia">Грузия</option>
+                <option value="germany">Германия</option>
+                <option value="kazakhstan">Казахстан</option>
+                <option value="russia">Россия</option>
+                <option value="france">Франция</option>
+            </select>
+        </div>
+
+        <div class="form-row">
+            <label for="gender">Укажите пол</label>
+            <div class="radio-group">
+                <div class="radio-option">
+                    <input type="radio" id="male" value="male" name="user_gender">
+                    <label for="male" class="light">Мужской</label>
+                </div>
+                <div class="radio-option">
+                    <input type="radio" id="female" value="female" name="user_gender">
+                    <label for="female" class="light">Женский</label>
+                </div>
+            </div>
+        </div>
+
+        <div class="form-row">
+            <label for="student">Являетесь ли вы студентом Политеха?</label>
+            <div class="radio-group">
+                <div class="radio-option">
+                    <input type="radio" id="yes" value="yes" name="user_answer">
+                    <label for="yes" class="light">Да</label>
+                </div>
+                <div class="radio-option">
+                    <input type="radio" id="no" value="no" name="user_answer">
+                    <label for="no" class="light">Нет</label>
+                </div>
+            </div>
+        </div>
+
+        <div class="form-row">
+            <label for="mail">E-mail *</label>
+            <input type="email" id="mail" placeholder="ivanov@mail.ru" title="Введите почту mail.ru" pattern=".+@mail\.ru" required>
+        </div>
+
+        <div class="form-row">
+            <label for="phone">Телефон</label>
+            <input type="tel" id="phone" placeholder="+7 (999) 999-99-99" maxlength="21">
+        </div>
+
+        <div class="form-row">
+            <label for="password">Пароль *</label>
+            <input type="password" id="password" placeholder="Придумайте пароль" minlength="8" required>
+        </div>
+
+        <div class="consent-row">
+            <label for="data" class="consent-label">
+                Согласие на обработку персональных данных *
+                <input type="checkbox" id="data" value="data_yes" name="user_data" required>
+            </label>
+        </div>
+
+        <div class="footer-section">
+            <div class="button-group">
+                <button title="Отправить форму" type="submit" id="submit" formtarget="_blank">Зарегистрироваться</button>
+                <button title="Удалить введённые данные" type="reset" id="reset">Очистить форму</button>
+            </div>
+            <p class="note">Поля, отмеченные звездочкой *, обязательны для заполнения.</p>
+        </div>
+
+    </form>
+</body>
+</html>
